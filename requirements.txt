@@ -1,0 +1,5 @@
+pytube
+pydub
+SpeechRecognition
+pandas
+ffmpeg-python
