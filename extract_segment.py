@@ -15,7 +15,7 @@ class SplitWavAudioMubin():
         try:
             self.audio = AudioSegment.from_file(self.filepath,"mp4")
         except:
-            print("Error with file path")
+            print("No such file exists as : ",self.filepath)
     
     def get_duration(self):
         return self.audio.duration_seconds
@@ -38,11 +38,11 @@ class SplitWavAudioMubin():
 
         total_seconds=self.get_duration()
         print("Length of the video is :",total_seconds)
-        j=0
+        j=1
         
         for i in range(0,int(total_seconds)-min_per_split, min_per_split):
             #split_fn = str(i) + '_' + self.filename
-            split_fn=f"{j}.wav"
+            split_fn=f"audio{j}.wav"
             j+=1
             self.single_split(i, i+min_per_split, split_fn)
             print(split_fn + ' Done')
@@ -50,5 +50,5 @@ class SplitWavAudioMubin():
         print('All splited successfully')
 
 if __name__=="__main__":
-    sp=SplitWavAudioMubin("main_audio","test.wav","audio_split")
+    sp=SplitWavAudioMubin("main_audio","got.mp4","audio_split")
     sp.multiple_split(20)
