@@ -9,13 +9,14 @@ class text_extraction():
         self.directory=audio_Split_directory
 
 
-    def extract(self,foldername=None,output_name="metadata.txt"):
+    def extract(self,foldername,output_name="metadata.txt"):
         r = sr.Recognizer()
         
         if(foldername is None):
             pth="metadata.txt"
         else:
             pth=os.path.join(foldername,output_name)
+        #print("Path to the output file is : ", pth)
         f=open(pth,"w+")
         for file in sorted(os.listdir(self.directory)):
             filename = os.fsdecode(file)
@@ -24,15 +25,15 @@ class text_extraction():
                     # listen for the data (load audio to memory)
                     audio_data = r.record(source)
                     # recognize (convert from speech to text)
-                    text = r.recognize_google(audio_data)
+                    text = r.recognize_google(audio_data,language = 'en-IN')
                     #print(filename)
                     name=str(filename).split(".")[0]
                     f.write(f"{name}|{text}\n")
-                    #print(text)
+                    print(f"Extracted text from {filename}")
         print("Text folder saved in path : ",pth)
         f.close()
 if __name__=="__main__":
     et=text_extraction("audio_split")
-    et.extract()
+    et.extract("D:\whilter\TTS_Data_Maker\main_audio","metadata.txt")
 
                     
