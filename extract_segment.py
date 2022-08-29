@@ -7,11 +7,15 @@ class SplitWavAudioMubin():
     def __init__(self, folder, filename,output_folder):
         self.folder = folder
         self.filename = filename
-        self.filepath = folder + "\\" + filename
+        #self.filepath = folder + "\\" + filename
         self.output_folder=output_folder
+        self.filepath = os.path.join(folder, filename)
         
         #self.audio = AudioSegment.from_wav(self.filepath)
-        self.audio = AudioSegment.from_file(self.filepath,"mp4")
+        try:
+            self.audio = AudioSegment.from_file(self.filepath,"mp4")
+        except:
+            print("Error with file path")
     
     def get_duration(self):
         return self.audio.duration_seconds
