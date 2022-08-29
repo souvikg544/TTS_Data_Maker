@@ -44,14 +44,52 @@ spliter.multiple_split(duration)
 
 ### Audio to speech 
 
-For Audio to speech we will choose over many text to speech engine including those of Google and IBM.
+For Audio to speech we will choose over many text to speech engine including those of Google and IBM. Run the below code snippet 
+to extract text from the audio snippets.
+
+```
+from extract_text import text_extraction
+
+path_to_audio_split="audio_split"
+path_to_output_folder=None # Implies will write a text file to the same folder
+output_folder_name="metadata.txt"
+
+et=et=text_extraction(path_to_audio_split)
+et.extract(path_to_output_folder,output_folder_name)
+```
 
 
 ### Final Dataset
 The final dataset will have metadata.txt and audio_split folder having all the audio files like 1.wav , 2.wav , 3.wav and soon
+metadata.txt file will look like this
+```
+metadata.txt-
+audio1|Hey how are you
+audio2|I hope you are fine
+audio3|Lets meet at dinner
+```
+The wav folder containing all the audio files will look like this
+```
+wav
+-audio1.wav
+-audio2.wav
+-audio3.wav
+```
+In the end, we should have the following folder structure:
+```
+/MyTTSDataset
+ |
+ | -> metadata.txt
+ | -> /wavs
+  | -> audio1.wav
+  | -> audio2.wav
+  | ...
+```
 
 
-## Note: 
+## Note:
+Please ignore if running on collab or cloud.
+ 
 pydub module used extensively in this repository uses ffmpeg to process wav files. Hence if
 running on a local machine it requires ffmpeg to be downloaded and the bin folder must be added to path.
 
