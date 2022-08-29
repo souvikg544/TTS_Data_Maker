@@ -9,7 +9,7 @@ class text_extraction():
         self.directory=audio_Split_directory
 
 
-    def extract(self,foldername,output_name="metadata.txt"):
+    def extract(self,foldername,output_name):
         r = sr.Recognizer()
         
         if(foldername is None):
@@ -25,7 +25,10 @@ class text_extraction():
                     # listen for the data (load audio to memory)
                     audio_data = r.record(source)
                     # recognize (convert from speech to text)
-                    text = r.recognize_google(audio_data,language = 'en-IN')
+                    try:
+                        text = r.recognize_google(audio_data,language = 'en-IN')
+                    except:
+                        text="Music"
                     #print(filename)
                     name=str(filename).split(".")[0]
                     f.write(f"{name}|{text}\n")
