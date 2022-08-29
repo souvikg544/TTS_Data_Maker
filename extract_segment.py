@@ -26,7 +26,8 @@ class SplitWavAudioMubin():
         t1=from_min* 1000
         t2=to_min* 1000
         split_audio = self.audio[t1:t2]
-        split_audio.export(self.output_folder + '\\' + split_filename, format="wav")
+        output= os.path.join(self.output_folder, split_filename)
+        split_audio.export(output, format="wav")
         
     def multiple_split(self, min_per_split):
 
