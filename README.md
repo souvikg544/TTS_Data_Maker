@@ -4,10 +4,10 @@
 
 Link to TTS repository - https://github.com/coqui-ai/TTS
 
-Link to TTS pypi - https://pypi.org/project/TTS/#description
+Link to TTS in pypi - https://pypi.org/project/TTS/#description
 
 ## Steps to build your Dataset
-If you have want to use an audio file of your own skip step 2 . If you want to use audio from a wide range of speakers available at youtube step 2 is for you.
+If you have want to use an audio file of your own skip step 2 . If you want to use audio from a wide range of speakers available from youtube step 2 is for you.
 
 ### 1. Clone the repository
 ```
@@ -21,6 +21,7 @@ pip install -r requirements.txt
 ### 2. Download a speech
 To download an audio from YouTube video cd into the TTS_Data_Maker directory and use audio_download.py
 Below is a sample command for downloading a GOT video :) .A mp4 file will be downloaded in the main_audio directory.
+It is required to give the video_link and speaker/video name as arguments to the below python file.
 ```
 python audio_download.py --video_link https://www.youtube.com/watch?v=-B8IkMj6d1E --speaker_name got
 
@@ -32,10 +33,10 @@ To split the downloaded audio into smaller parts use the extract_segment.py file
 
 ```
 from extract_segment import SplitWavAudioMubin
-download_folder="main_audio"
-video_filename="got.mp4"
-output_folder="audio_split"
-duration=20
+download_folder="main_audio"                      #folder in which audio file is stored
+video_filename="got.mp4"                          # Filename of the audio
+output_folder="/content/sample_tts_dataset/wavs"  #Output folder that will have segments of audio 
+duration=20                                       # Duration of each split in seconds
 
 spliter=SplitWavAudioMubin(download_folder,video_filename,output_folder)
 spliter.multiple_split(duration)
@@ -50,12 +51,12 @@ to extract text from the audio snippets.
 ```
 from extract_text import text_extraction
 
-path_to_audio_split="audio_split"
-path_to_output_folder=None # Implies will write a text file to the same folder
-output_folder_name="metadata.txt"
+path_to_audio_split="/content/sample_tts_dataset/wavs"  # As the name suggests use the same folder as output folder before
+output_folder="/content/sample_tts_dataset"             # Output folder having the text file
+output_file= "metadata.txt"                             # Name of the text file.
 
-et=et=text_extraction(path_to_audio_split)
-et.extract(path_to_output_folder,output_folder_name)
+et=text_extraction(path_to_audio_split)
+et.extract(output_folder,output_file)
 ```
 
 
@@ -85,11 +86,22 @@ In the end, we should have the following folder structure:
   | -> audio2.wav
   | ...
 ```
+## Implementation
+
+- Implementing from github readmes is always a pain.
+To make things easier,the entire process has been implemented in Google collab -
+[![Collab for tts data maker](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1F2lxFNIHxvNcAhzSoxDl_W4nX5tnu6nr?usp=sharing)
+
+- The dataset creation must be followed by creating a model using TTS. Details of the same can be found from this notebook -
+[![Collab for TTS](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1F8mdG6Vm7kAigyLZhc37_vTQBnh7wgk2?usp=sharing)
+
+
+
 
 
 ## Note:
-Please ignore if running on collab or cloud.
- 
+*Please ignore if running on collab or cloud.*
+
 pydub module used extensively in this repository uses ffmpeg to process wav files. Hence if
 running on a local machine it requires ffmpeg to be downloaded and the bin folder must be added to path.
 
