@@ -27,12 +27,17 @@ class text_extraction():
                     # recognize (convert from speech to text)
                     try:
                         text = r.recognize_google(audio_data,language = 'en-IN')
+                        name=str(filename).split(".")[0]
+                        f.write(f"{name}|{text}\n")
+                        print(f"Extracted text from {filename}")
                     except:
-                        text="Music"
+                        os.remove(os.path.join(self.directory, filename))
+                        print(f"Could not extract from {filename}")
+
+                        
                     #print(filename)
-                    name=str(filename).split(".")[0]
-                    f.write(f"{name}|{text}\n")
-                    print(f"Extracted text from {filename}")
+                    
+                    
         print("Text folder saved in path : ",pth)
         f.close()
 if __name__=="__main__":
