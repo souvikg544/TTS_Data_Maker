@@ -33,7 +33,7 @@ class text_extraction():
                     try:
                         text = r.recognize_google(audio_data,language = 'en-IN')
                         name=str(filename).split(".")[0]
-                        f.write(f"{name}|{text}\n")
+                        f.write(f"{name}|{text}|{text}\n")
                         #row.append(f"{name}|{text}")
                         #writer.writerows(f"{name}|{text}")
                         data.append([f"{name}|{text}|{text}"])
