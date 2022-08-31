@@ -1,6 +1,6 @@
 import speech_recognition as sr
 import os
-
+import csv
 #filename = "audio_split\\1.wav"
 
 class text_extraction():
@@ -14,10 +14,15 @@ class text_extraction():
         
         if(foldername is None):
             pth="metadata.txt"
+            pth1="metadata.csv"
         else:
             pth=os.path.join(foldername,output_name)
+            pth1=os.path.join(foldername,"metadata.csv")
         #print("Path to the output file is : ", pth)
         f=open(pth,"w+")
+        c = open(pth1, 'w+')
+        writer = csv.writer(c)
+        data=[]
         for file in sorted(os.listdir(self.directory)):
             filename = os.fsdecode(file)
             if filename.endswith(".wav"):
@@ -29,6 +34,9 @@ class text_extraction():
                         text = r.recognize_google(audio_data,language = 'en-IN')
                         name=str(filename).split(".")[0]
                         f.write(f"{name}|{text}\n")
+                        #row.append(f"{name}|{text}")
+                        #writer.writerows(f"{name}|{text}")
+                        data.append([f"{name}|{text}|{text}"])
                         print(f"Extracted text from {filename}")
                     except:
                         os.remove(os.path.join(self.directory, filename))
@@ -36,10 +44,13 @@ class text_extraction():
 
                         
                     #print(filename)
-                    
-                    
-        print("Text folder saved in path : ",pth)
+
+        writer.writerows(data)         
+        c.close()          
+        print("Text file saved in path : ",pth)
+        print("Csv file saved in path : ",pth1)
         f.close()
+        
 if __name__=="__main__":
     et=text_extraction("audio_split")
     et.extract("D:\whilter\TTS_Data_Maker\main_audio","metadata.txt")
