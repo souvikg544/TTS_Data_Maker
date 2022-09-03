@@ -15,6 +15,7 @@ class SplitWavAudioMubin():
         try:
             self.audio = AudioSegment.from_file(self.filepath,"mp4")
             self.audio= self.audio.set_frame_rate(22050)
+            self.audio = self.audio.set_channels(1)
 
         except:
             print("No such file exists as : ",self.filepath)
