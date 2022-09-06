@@ -17,7 +17,8 @@ class SplitWavAudioMubin():
             self.audio= self.audio.set_frame_rate(22050)
             self.audio = self.audio.set_channels(1)
 
-        except:
+        except Exception as e:
+            print(e)
             print("No such file exists as : ",self.filepath)
     
     def get_duration(self):
@@ -31,6 +32,7 @@ class SplitWavAudioMubin():
         split_audio = self.audio[t1:t2]
         output= os.path.join(self.output_folder, split_filename)
         split_audio.export(output, format="wav")
+
         
     def multiple_split(self, min_per_split):
 
