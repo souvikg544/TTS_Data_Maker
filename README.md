@@ -1,5 +1,8 @@
 # Text To Speech Dataset Maker
 
+![data_maker](https://user-images.githubusercontent.com/63863911/192467194-ef6cce26-1ece-44be-9fff-5cd65b043280.png)
+
+
 ### This repository offers a way to make personalized dataset for model creation using the famous TTS text to speech github repo.
 
 Link to TTS repository - https://github.com/coqui-ai/TTS
