@@ -4,7 +4,7 @@ import os
 import ffmpeg
 
 class SplitWavAudioMulti():
-    def __init__(self, folder, filename,output_folder):
+    def __init__(self, folder, filename,output_folder,format="mp4"):
         self.folder = folder
         self.filename = filename
         #self.filepath = folder + "\\" + filename
@@ -13,7 +13,7 @@ class SplitWavAudioMulti():
         
         #self.audio = AudioSegment.from_wav(self.filepath)
         try:
-            self.audio = AudioSegment.from_file(self.filepath,"mp4")
+            self.audio = AudioSegment.from_file(self.filepath,format)
             self.audio= self.audio.set_frame_rate(22050)
             self.audio = self.audio.set_channels(1)
 
