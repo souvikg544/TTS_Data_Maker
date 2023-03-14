@@ -9,7 +9,7 @@ class text_extraction():
         self.directory=audio_Split_directory
 
 
-    def extract(self,foldername,output_name):
+    def extract(self,foldername,output_name,lang='en-IN'):
         r = sr.Recognizer()
         
         if(foldername is None):
@@ -31,7 +31,7 @@ class text_extraction():
                     audio_data = r.record(source)
                     # recognize (convert from speech to text)
                     try:
-                        text = r.recognize_google(audio_data,language = 'en-IN')
+                        text = r.recognize_google(audio_data,language =lang)
                         name=str(filename).split(".")[0]
                         f.write(f"{name}|{text}|{text}\n")
                         #row.append(f"{name}|{text}")
